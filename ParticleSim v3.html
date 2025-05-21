@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>growth</title>
+    <style>
+        body { 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background-color: #111;
+            overflow: hidden;
+        }
+        #container {
+            position: relative;
+            width: 100vmin;
+            height: 100vmin;
+        }
+        canvas { 
+            display: block;
+            border-radius: 50%;
+        }
+        .counter {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter" id="ballCounter">Balls: 0</div>
+    <div id="container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    <script>
+        const container = document.getElementById("container");
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const ballCounter = document.getElementById("ballCounter");
+
+        let balls = [];
+        let lastBallTime = 0;
+        const MAX_BALLS = 10000;
+        let circleRadius;
+
+        function setupCanvas() {
+            const size = Math.min(window.innerHeight, window.innerWidth);
+            circleRadius = size / 2;
+            
+            container.style.width = `${size}px`;
+            container.style.height = `${size}px`;
+            
+            canvas.width = size;
+            canvas.height = size;
+            
+            drawCircleBorder();
+        }
+
+        function drawCircleBorder() {
+            ctx.beginPath();
+            ctx.arc(circleRadius, circleRadius, circleRadius - 2, 0, Math.PI * 2);
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        window.addEventListener('load', setupCanvas);
+        window.addEventListener('resize', setupCanvas);
+
+        document.addEventListener("click", startFirstBall);
+
+        function startFirstBall() {
+            if (balls.length === 0) {
+                createBall();
+                lastBallTime = Date.now();
+                requestAnimationFrame(update);
+                setInterval(addBallIfNeeded, 1);
+            }
+        }
+
+        function addBallIfNeeded() {
+            if (balls.length > 0 && balls.length < MAX_BALLS) {
+                createBall();
+            }
+        }
+
+        function createBall() {
+            const speed = 2;
+            const angle = Math.random() * Math.PI * 2;
+            const radius = 2;
+            
+            const newBall = {
+                x: circleRadius,
+                y: circleRadius,
+                radius: radius,
+                speed: speed,
+                angle: angle,
+                dx: Math.cos(angle) * speed,
+                dy: Math.sin(angle) * speed,
+                color: getRandomColor()
+            };
+            
+            balls.push(newBall);
+            updateCounter();
+        }
+
+        function getRandomColor() {
+            const colors = ['#ff0', '#f0f', '#0ff' ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawCircleBorder();
+            
+            balls.forEach((ball, index) => {
+                ball.x += ball.dx;
+                ball.y += ball.dy;
+                
+                const distance = Math.sqrt(
+                    Math.pow(ball.x - circleRadius, 2) + 
+                    Math.pow(ball.y - circleRadius, 2)
+                );
+                
+                if (distance + ball.radius > circleRadius) {
+                    const nx = (ball.x - circleRadius) / distance;
+                    const ny = (ball.y - circleRadius) / distance;
+                    
+                    const dotProduct = ball.dx * nx + ball.dy * ny;
+                    ball.dx = ball.dx - 2 * dotProduct * nx;
+                    ball.dy = ball.dy - 2 * dotProduct * ny;
+                    
+                    const correction = circleRadius - distance - ball.radius;
+                    ball.x += nx * correction;
+                    ball.y += ny * correction;
+                }
+                
+                drawBall(ball);
+            });
+            
+            requestAnimationFrame(update);
+        }
+
+        function drawBall(ball) {
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fillStyle = ball.color;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function updateCounter() {
+            ballCounter.textContent = `Balls: ${balls.length}`;
+        }
+    </script>
+</body>
+</html>

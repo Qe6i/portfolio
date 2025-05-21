@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kulki</title>
+    <style>
+        body { 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background-color: #111; 
+        }
+        canvas { 
+            background: #111;  
+        }
+        .counter {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter" id="ballCounter">Balls: 0</div>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const ballCounter = document.getElementById("ballCounter");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let balls = [];
+        let lastBallTime = 0;
+        const MAX_BALLS = 10000;
+
+        window.addEventListener('load', resizeCanvas);
+        window.addEventListener('resize', resizeCanvas);
+
+        function resizeCanvas() {
+            const wasBallsActive = balls.length > 0;
+    
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+    
+            if (wasBallsActive) {
+                balls.forEach(ball => {
+                    ball.x = canvas.width / 2;
+                    ball.y = canvas.height / 2;
+                });
+            }
+        }
+
+        document.addEventListener("click", startFirstBall);
+
+        function startFirstBall() {
+            if (balls.length === 0) {
+                createBall();
+                lastBallTime = Date.now();
+                requestAnimationFrame(update);
+                setInterval(addBallIfNeeded, 2);
+            }
+        }
+
+        function addBallIfNeeded() {
+            if (balls.length > 0 && balls.length < MAX_BALLS) {
+                createBall();
+            }
+        }
+
+        function createBall() {
+            const speed = 5;
+            const angle = Math.random() * Math.PI * 2;
+        
+            const newBall = {
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                radius: 5,
+                speed: speed,
+                angle: angle,
+                dx: Math.cos(angle) * speed,
+                dy: Math.sin(angle) * speed,
+                color: getRandomColor()
+            };
+            
+            balls.push(newBall);
+            updateCounter();
+        }
+
+        function getRandomColor() {
+            const colors = ['#f0f', '#ff0', '#0ff'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            balls.forEach(ball => {
+                ball.x += ball.dx;
+                ball.y += ball.dy;
+                
+                if (ball.x - ball.radius <= 0 || ball.x + ball.radius >= canvas.width) {
+                    ball.dx *= -1;
+                }
+                if (ball.y - ball.radius <= 0 || ball.y + ball.radius >= canvas.height) {
+                    ball.dy *= -1;
+                }
+                
+                drawBall(ball);
+            });
+            
+            requestAnimationFrame(update);
+        }
+
+        function drawBall(ball) {
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fillStyle = ball.color;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function updateCounter() {
+            ballCounter.textContent = `Balls: ${balls.length}`;
+        }
+
+    </script>
+</body>
+</html>
