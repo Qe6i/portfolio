@@ -1,4 +1,4 @@
-# Ball Growth Simulation
+# Particle Simulator
 
 This project is a visual simulation of bouncing balls within a circular or fullscreen canvas. It demonstrates basic 2D physics, collision handling, and rendering using the HTML5 `<canvas>` element.
 
