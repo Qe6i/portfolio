@@ -13,12 +13,12 @@ I decided to snapshot and maintain **three different versions** of this simulati
 - Balls bounce off the edges of the window.
 - Great for observing how the balls behave in a rectangular space.
 
-### 2. Circle Canvas – Instant Balls
+### 2. Circle Canvas – Instant Spawn
 - The canvas is a perfect circle.
 - **10,000 balls** are created immediately at the start.
 - High-density, chaotic simulation inside a bounded circle.
 
-### 3. Circle Canvas – Gradual Growth
+### 3. Circle Canvas – Gradual Spawn
 - The canvas is a circle centered in the screen.
 - Starts with one ball on user click.
 - Additional balls are added continuously over time.
