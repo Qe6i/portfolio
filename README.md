@@ -62,8 +62,4 @@ Note: Internet connection is required for public holiday API to work.
 
 ---
 
-## License
-
-This project is part of academic work and is released for educational purposes.
-
 
