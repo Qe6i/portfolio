@@ -41,9 +41,6 @@ This project is actively under development. Upcoming planned features include:
 
 ---
 
-
----
-
 ## How to Run
 
 1. Clone the repository and switch to the `calendar` branch.  
