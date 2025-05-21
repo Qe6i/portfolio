@@ -57,6 +57,5 @@ Note: Internet connection is required for public holiday API to work.
 - This project is part of a thesis and is subject to ongoing refactoring and updates.  
 - Current version uses `localStorage`; it is not multi-user.   
 
----
 
 
