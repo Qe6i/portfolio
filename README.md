@@ -48,8 +48,6 @@ This project is actively under development. Upcoming planned features include:
 3. Click through the calendar, write notes, and test the theme toggle.  
 4. Make sure to provide your own https://calendarific.com/ `API_KEY` for the holidays API.
 
-Note: Internet connection is required for public holiday API to work.
-
 ---
 
 ## Notes
