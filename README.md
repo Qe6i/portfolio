@@ -18,7 +18,7 @@ I decided to snapshot and maintain **three different versions** of this simulati
 - **10,000 balls** are created immediately at the start.
 - High-density, chaotic simulation inside a bounded circle.
 
-### 3. Circle Canvas – Gradual Growth _(this branch)_
+### 3. Circle Canvas – Gradual Growth
 - The canvas is a circle centered in the screen.
 - Starts with one ball on user click.
 - Additional balls are added continuously over time.
