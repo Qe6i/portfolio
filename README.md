@@ -24,11 +24,15 @@ Across the branches, you'll find a variety of technologies including:
 
 - Python
 - Flask
-- C#
-- C++
-- .NET
 - HTML
 - CSS
 - JS
-- PHP 
+
+## Planned Technologies
+
+In future projects, I plan to expand my portfolio with work involving:
+- C#
+- C++
+- .NET
+- PHP
 - SQL
