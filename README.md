@@ -22,27 +22,27 @@ All data is stored in memory (Python list), so it's reset every time the server 
 
 ## How to Run
 
-### 1. Clone the Repository
+1. Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/flask-todo-sandbox.git
 cd flask-todo-sandbox
 ```
 
-### 2. Create a Virtual Environment (optional but recommended)
+2. Create a Virtual Environment (optional but recommended)
 
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-### 3. Install Dependencies
+3. Install Dependencies
 
 ```bash
 pip install Flask
 ```
 
-### 4. Run the App
+4. Run the App
 
 ```bash
 python app.py
