@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalendarz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calendar-container" id="calendar-container">
+        <div class="header">
+            <div class="month-navigation">
+                <button class="nav-button" id="prev-month">←</button>
+                <div class="month-title" id="month-title">January 2023</div>
+                <button class="nav-button" id="next-month">→</button>
+            </div>
+            <button class="theme-toggle" id="theme-toggle">Dark Theme</button>
+        </div>
+        
+        <div class="calendar">
+            <div class="week-numbers" id="week-numbers"></div>
+            <div class="days-container">
+                <div class="days-header">
+                    <div class="day-header">Mon</div>
+                    <div class="day-header">Tue</div>
+                    <div class="day-header">Wed</div>
+                    <div class="day-header">Thu</div>
+                    <div class="day-header">Fri</div>
+                    <div class="day-header">Sat</div>
+                    <div class="day-header">Sun</div>
+                </div>
+                <div class="weeks" id="weeks"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
