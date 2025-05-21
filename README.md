@@ -24,6 +24,11 @@ All data is stored in memory (Python list), so it's reset every time the server 
 
 1. Clone the Repository
 
+```bash
+git clone --branch Flask-REST-API https://github.com/Qe6i/portfolio.git
+cd portfolio
+```
+
 2. Create a Virtual Environment (optional but recommended)
 
 ```bash
